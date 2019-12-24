@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html" charset="utf-8">
+<meta name="description" content="Datenbanken und SQL: Demo der Formulardatenübergabe">
+<meta name="author" content="Edwin Schicker">
+<title>Datenbanken und SQL: Datenweitergabe mit Formularen</title>
+</head>
+
+<body text="#000000" bgcolor="#FFFFEF" link="#FF0000" alink="#FF0000" vlink="#FF0000">
+<center><h1>Datenbanken und SQL</h1></center>
+<center><h3>Edwin Schicker</h3></center>
+<center><h4>Übungaufgabe 2 zu Kapitel 6</h4></center>
+<p>Dies ist die Datei <i>ueb_kap6_2.html</i>. Mit Klick auf den Start-Button wird die Datei
+<i>ueb_kap6_2.php</i> aufgerufen.</p>
+<p>Diese Übung fordert zur Eingabe einer Mitarbeiternummer ein.
+    Nach Eingabe der Nummer und Klick auf den Weiter-Button werden die Daten des Mitarbeiters ausgegeben.
+    Existiert der Mitarbeiter nicht, so erfolgt eine Fehlermeldung.</p>
+<p>Bitte geben Sie Hersteller, Server, Datenbank, Kennung, Passwort und die Mitarbeiternummer ein:</p>
+
+
+<form action="ueb_kap6_2.php" method="post">
+  <table cellpadding="10">
+   <tr>
+    <td>Hersteller: </td>
+    <td><input type="radio" name="Hersteller" value="Oracle" checked/> Oracle<br>
+        <input type="radio" name="Hersteller" value="OracleUTF8" checked/> Oracle , UTF8 kodiert<br>
+        <input type="radio" name="Hersteller" value="MySQL"/> MySQL<br>
+        <input type="radio" name="Hersteller" value="SQLServer"/> MS SQL Server</td>
+   </tr>
+   <tr>
+    <td>Server: </td>
+    <td><input type="Text" name="Server" size="20" maxlength="40" value="localhost"/>
+        (in Oracle nicht erforderlich und nicht verwendet)</td>
+   </tr>
+   <tr>
+    <td>Datenbank: </td>
+    <td><input type="Text" name="Datenbank" size="40" maxlength="40"/>
+    </td>
+   </tr>
+   <tr>
+    <td>Kennung: </td>
+    <td><input type="Text" name="Kennung" size="20" maxlength="20" value="bike"/></td>
+   </tr>
+   <tr>
+    <td>Passwort: </td>
+    <td><input type="Password" name="Passwort" size="20" maxlength="20"/></td>
+   </tr>
+   <tr>
+      <tr>
+    <td>Mitarbeiternummer: </td>
+    <td><input type="Text" name="Mitarbeiternummer" size="20" maxlength="20"/></td>
+   </tr>
+   <tr>
+    <td></td>
+    <td><input type="Submit" value="Weiter"/></td>
+  </table>
+</form>
+
+<hr noshade size="1">
+
+<p><center><a href="index.html">Zurück zur Startseite</a></center></p>
+</body>
+</html>

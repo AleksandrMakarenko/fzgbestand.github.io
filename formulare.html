@@ -1,0 +1,56 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html" charset="utf-8">
+<meta name="description" content="Datenbanken und SQL: Demo der Formulardatenübergabe">
+<meta name="author" content="Edwin Schicker">
+<title>Datenbanken und SQL: Datenweitergabe mit Formularen</title>
+</head>
+
+<body text="#000000" bgcolor="#FFFFEF" link="#FF0000" alink="#FF0000" vlink="#FF0000">
+<center><h1>Datenbanken und SQL</h1></center>
+<center><h3>Edwin Schicker</h3></center>
+<p>Dies ist die Datei <i>formulare.html</i>. Mit Klick auf den Start-Button wird die Datei
+<i>formulare.php</i> aufgerufen, oder?</p>
+<p>Diese Seite ist der Startseite des ersten Datenbankzugriffs nachempfunden. Allerdings erfolgt hier noch kein Datenbankaufruf.
+  Hier wird nur die Übergabe der Formulardaten gezeigt und getestet.</p>
+<p>Bitte geben Sie die Daten zum Einloggen in die Datenbank BIKE ein. 
+  Anschließend erfolgt die Ausgabe der von Ihnen eingegebenen Daten.</p>
+<p>Bitte geben Sie also Hersteller, Server, Datenbank, Kennung und Passwort ein:</p>
+
+<form action="formulare.php" method="post">
+  <table cellpadding="10">
+   <tr>
+    <td>Hersteller: </td>
+    <td><input type="radio" name="Hersteller" value="Oracle" checked/> Oracle<br>
+        <input type="radio" name="Hersteller" value="MySQL"/> MySQL<br>
+        <input type="radio" name="Hersteller" value="SQLServer"/> MS SQL Server</td>
+   </tr>
+   <tr>
+    <td>Server: </td>
+    <td><input type="Text" name="Server" size="20" maxlength="40" value="localhost"/>
+        (in Oracle nicht erforderlich und nicht verwendet)</td>
+   </tr>
+   <tr>
+    <td>Datenbank: </td>
+    <td><input type="Text" name="Datenbank" size="40" maxlength="40"/>
+        (bei Oracle-Remotezugriff: //Serveradresse/Datenbank)</td>
+   </tr>
+   <tr>
+    <td>Kennung: </td>
+    <td><input type="Text" name="Kennung" size="20" maxlength="20" value="bike"/></td>
+   </tr>
+   <tr>
+    <td>Passwort: </td>
+    <td><input type="Password" name="Passwort" size="20" maxlength="20"/></td>
+   </tr>
+   <tr>
+    <td></td>
+    <td><input type="Submit" value="Start"/></td>
+  </table>
+</form>
+
+<hr noshade size="1">
+
+<p><center><a href="index.html">Zurück zur Startseite</a></center></p>
+</body>
+</html>
