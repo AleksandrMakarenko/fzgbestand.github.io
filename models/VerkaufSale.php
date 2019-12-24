@@ -1,0 +1,117 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "verkauf_sale".
+ *
+ * @property int $verkaufsnummer_sale_id
+ * @property string $fin_vehicle_id
+ * @property string $verkaufsdatum_sale_date
+ * @property string $kaeufersname_customersname
+ * @property string $nettopreis_net_price
+ * @property string $mws_value_added_tax
+ * @property string $bruttopreis_gross_price
+ * @property string $gewinn_profit
+ * @property string $zahlungsmethode_payment_method
+ * @property string $zahlungsdatum_payment_date
+ * @property string $mitarbeiter_employee
+ * @property string $sonstiges_other
+ * @property int $kaeufersnummer_customer_id
+ */
+class VerkaufSale extends \yii\db\ActiveRecord
+{
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'verkauf_sale';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['verkaufsnummer_sale_id', 'fin_vehicle_id', 'verkaufsdatum_sale_date', 'kaeufersname_customersname', 'nettopreis_net_price', 'mws_value_added_tax',
+                'bruttopreis_gross_price', 'gewinn_profit', 'zahlungsmethode_payment_method', 'zahlungsdatum_payment_date', 'sonstiges_other','kaeufersnummer_customer_id','mitarbeiter_employee'], 'required'],
+            [['verkaufsnummer_sale_id','kaeufersnummer_customer_id'], 'integer'],
+            [['verkaufsdatum_sale_date', 'zahlungsdatum_payment_date'], 'date','format'=>'php:Y-m-d','message'=>'richtiges Datumformat JJJJ-MM-TT '],
+            [['kaeufersname_customersname', 'zahlungsmethode_payment_method', 'sonstiges_other'], 'string'],
+            [['nettopreis_net_price', 'mws_value_added_tax', 'bruttopreis_gross_price', 'gewinn_profit'], 'number'],
+            [['fin_vehicle_id','mitarbeiter_employee'], 'string', 'max' => 15],
+            [['verkaufsnummer_sale_id'], 'unique'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'verkaufsnummer_sale_id' => 'Verkaufsnummer (Sale ID)',
+            'fin_vehicle_id' => 'Fin (Vehicle ID)',
+            'verkaufsdatum_sale_date' => 'Verkaufsdatum (Sale Date)',
+            'kaeufersname_customersname' => 'Kaeufersname (Customersname)',
+            'nettopreis_net_price' => 'Nettopreis (Net Price)',
+            'mws_value_added_tax' => 'Mws Value (Added Tax)',
+            'bruttopreis_gross_price' => 'Bruttopreis (Gross Price)',
+            'gewinn_profit' => 'Gewinn (Profit)',
+            'zahlungsmethode_payment_method' => 'Zahlungsmethode (Payment Method)',
+            'zahlungsdatum_payment_date' => 'Zahlungsdatum (Payment Date)',
+            'mitarbeiter_employee' => 'Mitarbeiter (Employee)',
+            'sonstiges_other' => 'Sonstiges (Other)',
+            'kaeufersnummer_customer_id' => 'Kaeufersnummer (Customer Id)',
+        ];
+    }
+    public function beforeSave($insert)
+    {
+        //var_dump($insert);Exit();
+        if($this->isNewRecord && !(FzgBestand::findOne($this->verkaufsnummer_sale_id))) {
+            $fzg_b = new FzgBestand();
+            $fzg_b->id = $this->verkaufsnummer_sale_id;
+            $fzg_b->fin = $this->fin_vehicle_id;
+            $fzg_b->vk_datum = $this->verkaufsdatum_sale_date;
+            $fzg_b->kaeufer = $this->kaeufersname_customersname;
+            $fzg_b->vk_netto_preis = $this->nettopreis_net_price;
+            $fzg_b->vk_mwst = $this->mws_value_added_tax;
+            $fzg_b->vk_brutto_preis = $this->bruttopreis_gross_price;
+            $fzg_b->gewinn = $this->gewinn_profit;
+            $fzg_b->mitarbeiter_employee = $this->mitarbeiter_employee;
+            $fzg_b->vk_status=1;
+          /*
+            $fzg_b->modell = $this->modell_car_model;
+            $fzg_b->fin = $this->fin_vehicle_number;
+            $fzg_b->nr = $this->alte_nr_old_insite_number;
+            $fzg_b->ek_datum = null;
+            $fzg_b->verkaeufer = null;
+            $fzg_b->ek_netto_preis = null;
+            $fzg_b->ek_mwst = null;
+            $fzg_b->ek_brutto_preis = null;
+            $fzg_b->sonstiges = null;*/
+            $fzg_b->save();
+            // var_dump($fzg_b->getErrors());Exit();
+        }
+        else if(($fzg_b = FzgBestand::findOne($this->verkaufsnummer_sale_id)) != null){
+
+            if( !($fzg_b->fin)){
+                $fzg_b->fin = $this->fin_vehicle_id;
+            }
+            $fzg_b->vk_datum = $this->verkaufsdatum_sale_date;
+            $fzg_b->kaeufer = $this->kaeufersname_customersname;
+            $fzg_b->vk_netto_preis = $this->nettopreis_net_price;
+            $fzg_b->vk_mwst = $this->mws_value_added_tax;
+            $fzg_b->vk_brutto_preis = $this->bruttopreis_gross_price;
+            $fzg_b->gewinn = $this->gewinn_profit;
+            $fzg_b->mitarbeiter_employee = $this->mitarbeiter_employee;
+            $fzg_b->save();
+        }
+
+        return parent::beforeSave($insert); // TODO: Change the autogenerated stub
+    }
+}
